@@ -16,9 +16,18 @@ const Pokemon = () => {
   }, []);
 
   return (
-    <div>
-      {" "}
-      <PokemonVerstka pokemon={pokemon} />
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        padding: "2rem",
+        gap: "3rem",
+      }}
+    >
+      {pokemon.map((elem) => (
+        <PokemonVerstka key={elem.id} pokemon={elem} />
+      ))}
     </div>
   );
 };
