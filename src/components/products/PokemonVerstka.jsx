@@ -1,34 +1,33 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const PokemonVerstka = ({ pokemon }) => {
+  const [elemPokemon, setElemPokemon] = useState();
+  const amin = async () => {
+    const { data } = await axios(pokemon.url);
+    setElemPokemon(data.sprites.front_default);
+    console.log(data);
+  };
+  useEffect(() => {
+    amin();
+  }, []);
   return (
     <div
       style={{
         display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        padding: "2rem",
-        gap: "3rem",
+        backgroundColor: "lightblue",
+        width: "25rem",
+        height: "10rem",
+        borderRadius: "1rem",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "9rem",
       }}
     >
-      {pokemon.map((elem) => (
-        <div
-          style={{
-            display: "flex",
-            backgroundColor: "lightblue",
-            width: "25rem",
-            height: "10rem",
-            borderRadius: "1rem",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "9rem",
-          }}
-        >
-          <img style={{ height: "6rem" }} src={elem.url.data} alt={elem.name} />
-          <span>{elem.name}</span>
-        </div>
-      ))}
+      <img style={{ height: "6rem" }} src={elemPokemon} alt={pokemon.name} />
+      <span style={{ fontWeight: "700", fontSize: "130%" }}>
+        {pokemon.name}
+      </span>
     </div>
   );
 };
